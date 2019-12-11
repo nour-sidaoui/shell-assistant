@@ -1,0 +1,42 @@
+{
+  "Core Commands": {
+    "Clears the screen": "clear",
+    "Home directory":  "cd ~",
+    "Root of drive":  "cd /",
+    "Previous directory":  "cd -",
+    "Short listing":  "ls",
+    "Long listing including hidden files":  "ls -la",
+    "Entire content of folder recursively":  "ls -R"
+  },
+  "Favorite Directories": {
+    "Go to PycharmProjects":  "cd /Users/Nour/PycharmProjects",
+    "Go to Desktop":  "cd /Users/Nour/Desktop"
+  },
+  "File Management": {
+    "Create new File":  "touch [file]",
+    "Remove a file": "rm [file]",
+    "Remove a directory and contents": "rm -r [directory]",
+    "Copies file contents to clipboard": "pbcopy < [file]",
+    "Paste clipboard contents":  "pbpaste",
+    "Paste clipboard contents into file, pbpaste > paste-test.txt": "pbpaste > [file]"
+  },
+  "Git": {
+    "init":  "git init",
+    "status":  "git status",
+    "add all":  "git add .",
+    "commit -m'1st'":  "git commit -m 'First commit'",
+    "add origin":  "git remote add origin [URL]",
+    "push -u origin master": "git push -u origin master"
+  },
+  "Tools": {
+    "clear clipboard":  "pbcopy < /dev/null",
+    "disable gateway":  "sudo spctl --master-disable",
+    "enable gateway": "sudo spctl --master-enable"
+  },
+  "Compiling": {
+    "activate venv":  "source venv/bin/activate",
+    "compile in Alias Mode":  "python3.7 setup.py py2app -A",
+    "del dist & build":  "rm -rf build dist",
+    "compile as standalone":  "python3.7 setup.py py2app"
+  }
+}
