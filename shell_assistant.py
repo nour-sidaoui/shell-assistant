@@ -1,8 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 from subprocess import call
+from pynput.keyboard import Key, Controller
 import json
 import os
+
+keyboard = Controller()
+
 
 with open('config.json') as config:
     json_config = json.load(config)
@@ -21,30 +25,24 @@ def set_min_size():
     root.minsize(w, h)
 
 
-def launch_terminal():
-    open_terminal = """osascript -e 'tell application "Terminal" to activate'"""
+def launch_open_terminal():
+    open_terminal = """osascript -e'
+    tell application "Terminal"  
+        reopen
+        activate
+    end tell'
+    """
     os.system(open_terminal)
 
 
 def press_return():
-    press_enter = """osascript -e 'tell application "System Events" to keystroke return'
-    """
-    os.system(press_enter)
+    keyboard.press(Key.enter)
+    keyboard.release(Key.enter)
 
 
 def send_command(cmd_content):
-    com1 = """osascript -e'
-    tell application "Terminal"
-        activate
-    end tell
-    tell application "System Events"
-        set textToType to """ + '"' + str(cmd_content) + '"' + """
-        delay 1
-        keystroke textToType
-    end tell'
-    """
-    os.system(com1)
-
+    launch_open_terminal()
+    keyboard.type(cmd_content)
     if execute.get() == 1:
         press_return()
 
@@ -104,7 +102,7 @@ if __name__ == '__main__':
     open_json_file = ttk.Button(customize_frame, text="Open JSON file", command=open_json, width=20)
     open_json_file.grid(row=0, column=1, sticky=E)
 
-    open_terminal_button = ttk.Button(customize_frame, text="Launch Terminal", command=launch_terminal, width=20)
+    open_terminal_button = ttk.Button(customize_frame, text="Open Terminal", command=launch_open_terminal, width=20)
     open_terminal_button.grid(row=0, column=2, sticky=E)
 
     execute = IntVar()

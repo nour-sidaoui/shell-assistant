@@ -8,12 +8,12 @@ OPTIONS = {'argv_emulation': False,
 setup(
     app=APP,
     name='Shell Assistant',
-    version='0.1',
+    version='0.2',
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
     license='Open source',
     author='Nour SIDAOUI',
     author_email='nour.sidaoui@gmail.com',
     setup_requires=['py2app'],
-    install_requires=[]
+    install_requires=['pynput']
 )
