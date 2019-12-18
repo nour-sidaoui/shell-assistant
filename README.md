@@ -9,3 +9,4 @@ Support Mac, will release Windows version soon.
 Feel free to suggest possible improvements 
 
 ![Fast Demo](shell_assistant_demo.gif)
+![Shell Assistant logo](shell_assistant_demo.png)
