@@ -9,8 +9,8 @@
     "Entire content of folder recursively":  "ls -R"
   },
   "Favorite Directories": {
-    "Go to PycharmProjects":  "cd /Users/Nour/PycharmProjects",
-    "Go to Desktop":  "cd /Users/Nour/Desktop"
+    "Go to PycharmProjects":  "cd /Users/[User]/PycharmProjects",
+    "Go to Desktop":  "cd /Users/[User]/Desktop"
   },
   "File Management": {
     "Create new File":  "touch [file]",
@@ -22,11 +22,18 @@
   },
   "Git": {
     "init":  "git init",
+    "pull existing repo":  "git pull",
+    "create .gitignore":  "git add .gitignore",
+    "open .gitignore with VIM":  "vim .gitignore",
+    "Save and exit VIM":  ":wq",
     "status":  "git status",
     "add all":  "git add .",
     "commit -m'1st'":  "git commit -m 'First commit'",
     "add origin":  "git remote add origin [URL]",
-    "push -u origin master": "git push -u origin master"
+    "Check selected origin":  "git remote origin -v",
+    "push -u origin master": "git push -u origin master",
+    "unstage file/dir (after add)":  "git reset [file/dir]",
+    "unstage all changes (after add)":  "git reset"
   },
   "Tools": {
     "clear clipboard":  "pbcopy < /dev/null",
