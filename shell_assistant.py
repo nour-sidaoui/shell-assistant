@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from tkinter import ttk
 from subprocess import call
 from pynput.keyboard import Key, Controller
@@ -8,13 +9,20 @@ import os
 keyboard = Controller()
 
 
-with open('config.json') as config:
-    json_config = json.load(config)
-
-
 def open_json():
     path = os.path.abspath('config.json')
     call(['open', '-a', 'TextEdit', path])
+
+
+try:
+    with open('config.json') as config:
+        json_config = json.load(config)
+except json.decoder.JSONDecodeError:
+    open_json()
+    Tk().withdraw()
+    messagebox.showerror("invalid config file", "The app couldn't parse the content of config.json.\n"
+                                                "Please check if it's JSON valid and try again")
+    exit()
 
 
 def set_min_size():
@@ -98,6 +106,7 @@ if __name__ == '__main__':
     customize_frame.grid_columnconfigure(3, weight=1)
 
     Label(customize_frame, text=' ', bg='gray92').grid(row=0, column=0, sticky=W)
+
 
     open_json_file = ttk.Button(customize_frame, text="Open JSON file", command=open_json, width=20)
     open_json_file.grid(row=0, column=1, sticky=E)

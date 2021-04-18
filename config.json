@@ -18,7 +18,7 @@
     "Remove a directory and contents": "rm -r [directory]",
     "Copies file contents to clipboard": "pbcopy < [file]",
     "Paste clipboard contents":  "pbpaste",
-    "Paste clipboard contents into file, pbpaste > paste-test.txt": "pbpaste > [file]"
+    "Paste clipboard contents into file": "pbpaste > [file]"
   },
   "Git": {
     "init":  "git init",
