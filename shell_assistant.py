@@ -96,7 +96,7 @@ def create_all_tabs():
 
             Button(line_frame,
                    text=command,
-                   width=350,
+                   width=500,
                    bg='#4a4a4a' if dark_mode_enabled() else '#dddddd',
                    fg='#dddddd' if dark_mode_enabled() else '#4a4a4a',  # #dddddd = off-white  & #4a4a4a = dark-grey
                    command=lambda p=command: send_command(p)).pack(side=RIGHT, fill=BOTH)
