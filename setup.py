@@ -10,7 +10,7 @@ OPTIONS = {'argv_emulation': False,
 setup(
     app=APP,
     name='Shell Assistant',
-    version='1.3',
+    version='1.4',
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
     license='Open source',

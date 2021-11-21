@@ -1,17 +1,21 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from subprocess import call
-from pynput.keyboard import Key, Controller
+from tkmacosx import Button
+
 import json
+from pynput.keyboard import Key, Controller
+
+import subprocess
 import os
+
 
 keyboard = Controller()
 
 
 def open_json():
     path = os.path.abspath('config.json')
-    call(['open', '-a', 'TextEdit', path])
+    subprocess.call(['open', '-a', 'TextEdit', path])
 
 
 try:
@@ -23,6 +27,17 @@ except json.decoder.JSONDecodeError:
     messagebox.showerror("invalid config file", "The app couldn't parse the content of config.json.\n"
                                                 "Please check if it's JSON valid and try again")
     exit()
+
+
+def dark_mode_enabled():
+    """
+        Checks DARK/LIGHT mode of macos.
+        return True if DarkMode is active
+    """
+    cmd = 'defaults read -g AppleInterfaceStyle'
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE, shell=True)
+    return bool(p.communicate()[0])
 
 
 def set_min_size():
@@ -62,19 +77,18 @@ def create_all_tabs():
         first = Frame(tab_parent,
                       width=tab_parent.winfo_width(),
                       height=tab_parent.winfo_height(),
-                      bg='gray92')
+                      )
 
         tab_parent.add(first, text=key)
         x = 0
 
         for desc, command in json_config[key].items():
-            line_frame = LabelFrame(first, bd=1)
+            line_frame = LabelFrame(first, bd=0)
             line_frame.pack(side=TOP, fill=X)
 
             Label(line_frame,
                   width=35,
                   wraplength=300,
-                  bg='white',
                   text=desc,
                   justify=LEFT,
                   anchor=W,
@@ -82,9 +96,19 @@ def create_all_tabs():
 
             Button(line_frame,
                    text=command,
-                   width=35,
-                   bd=0,
+                   width=350,
+                   bg='#4a4a4a' if dark_mode_enabled() else '#dddddd',
+                   fg='#dddddd' if dark_mode_enabled() else '#4a4a4a',  # #dddddd = off-white  & #4a4a4a = dark-grey
                    command=lambda p=command: send_command(p)).pack(side=RIGHT, fill=BOTH)
+
+            separator = ttk.Separator(line_frame, orient=HORIZONTAL)
+            separator.place(
+                relx=0.015,     # starting position on X axis (0.01 == 1% of width)
+                rely=0.97,      # starting position on Y axis
+                relwidth=0.98,  # width %
+                relheight=0.01  # height %
+            )
+
             x += 1
     set_min_size()
 
@@ -99,14 +123,15 @@ if __name__ == '__main__':
     create_all_tabs()
 
     customize_frame = LabelFrame(root,
-                                 bg='gray92',
-                                 relief=SUNKEN,
+                                 relief=FLAT,
                                  width=tab_parent.winfo_width())
     customize_frame.pack(expand=0, fill='both')
     customize_frame.grid_columnconfigure(3, weight=1)
 
-    Label(customize_frame, text=' ', bg='gray92').grid(row=0, column=0, sticky=W)
-
+    Label(customize_frame,
+          text=' ',
+          # bg='gray92'
+          ).grid(row=0, column=0, sticky=W)
 
     open_json_file = ttk.Button(customize_frame, text="Open JSON file", command=open_json, width=20)
     open_json_file.grid(row=0, column=1, sticky=E)
@@ -117,7 +142,6 @@ if __name__ == '__main__':
     execute = IntVar()
     execute_check = Checkbutton(customize_frame,
                                 text="Execute commands on press",
-                                bg='gray92',
                                 padx=5,
                                 pady=5,
                                 anchor=W,
