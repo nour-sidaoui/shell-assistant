@@ -7,6 +7,6 @@ Ideal for Git - Cisco - Network administration
 Support Mac, will release Windows version soon. 
 
 Feel free to suggest possible improvements 
+![Shell Assistant logo](shell_assistant_logo.png)
 
 ![Fast Demo](shell_assistant_demo.gif)
-![Shell Assistant logo](shell_assistant_logo.png)
