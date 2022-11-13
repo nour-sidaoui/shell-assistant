@@ -4,7 +4,7 @@ JSON based contents & commands - highly customisable.
 A useful tool for repetitive command lines.
 Ideal for Git - Cisco - Network administration
 
-Support Mac, will release Windows version soon. 
+Supports Mac Intel & ARM chipsets. 
 
 Feel free to suggest possible improvements 
 
